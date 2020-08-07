@@ -2,7 +2,7 @@
 
 > Updates the package.json with latest dependency versions.
 
-[![Build Status](https://travis-ci.com/RocktimSaikia/syzer.svg?branch=master?style=flat-square)](https://travis-ci.com/RocktimSaikia/syzer)
+![Travis (.com)](https://img.shields.io/travis/com/rocktimsaikia/syzer?style=flat-square)
 ![David](https://img.shields.io/david/rocktimsaikia/syzer?style=flat-square)
 ![GitHub package.json version](https://img.shields.io/github/package-json/v/rocktimsaikia/syzer?style=flat-square)
 ![NPM](https://img.shields.io/npm/l/syzer?style=flat-square)
