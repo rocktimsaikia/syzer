@@ -1,7 +1,7 @@
 {
 	"name": "syzer",
 	"version": "1.0.0",
-	"description": "Updates package.json with latest dependency versions",
+	"description": "Cli tool to update all npm dependencies at once",
 	"license": "MIT",
 	"bin": {
 		"syzer": "lib/cli.js"
