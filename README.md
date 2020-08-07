@@ -5,7 +5,7 @@
 ![Travis (.com)](https://img.shields.io/travis/com/rocktimsaikia/syzer?style=flat-square)
 ![David](https://img.shields.io/david/rocktimsaikia/syzer?style=flat-square)
 ![GitHub package.json version](https://img.shields.io/github/package-json/v/rocktimsaikia/syzer?style=flat-square)
-![NPM](https://img.shields.io/npm/l/syzer?style=flat-square)
+![GitHub](https://img.shields.io/github/license/rocktimsaikia/syzer?style=flat-square)
 
 <img src="https://github.com/rocktimsaikia/syzer/blob/master/.github/screenshot.png?raw=true" alt="screenshot" height="300px">
 
