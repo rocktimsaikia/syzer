@@ -50,4 +50,4 @@ Contributions are more than welcome!
 
 Thanks! :tada: :smile:
 
-[1]: https://github.com/rocktimsaikia/wuuz/issues
+[1]: https://github.com/rocktimsaikia/syzer/issues

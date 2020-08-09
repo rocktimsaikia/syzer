@@ -2,6 +2,11 @@
 
 > Updates the package.json with latest dependency versions.
 
+![Travis (.com)](https://img.shields.io/travis/com/rocktimsaikia/syzer?style=flat-square)
+![David](https://img.shields.io/david/rocktimsaikia/syzer?style=flat-square)
+![GitHub package.json version](https://img.shields.io/github/package-json/v/rocktimsaikia/syzer?style=flat-square)
+![GitHub](https://img.shields.io/github/license/rocktimsaikia/syzer?style=flat-square)
+
 <img src="https://github.com/rocktimsaikia/syzer/blob/master/.github/screenshot.png?raw=true" alt="screenshot" height="300px">
 
 ## Features
@@ -22,7 +27,41 @@ yarn global add syzer
 
 ## :clipboard: Usage
 
-1. Check the `package.json` if for outdated dependencies.
+```bash
+Usage:
+	$ syzer
+
+    $ syzer --update || syzer -u
+
+	$ syzer -u -i <package_name>
+
+Options:
+	--update, -u  updates package.json.
+
+    --ignore, -i added right after -u to ignore specific packages.
+
+    --version, shows the npu current version.
+
+    --help,  shows the user guide.
+
+ Example:
+ 	$ syzer
+ 	//shows all the packages.outdated packages are highlighted.
+
+    $ syzer -u
+    //updates all the outdated packages to its latest versions.
+
+    //or
+
+    $ syzer -u -i express nodemon
+    //updates all the packages except express & nodemon.
+
+    $ npm install
+    //then running npm install will install the latest dependencies
+
+```
+
+1. Check the `package.json` for outdated dependencies.
 
 ```sh
 $ syzer
