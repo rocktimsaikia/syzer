@@ -1,14 +1,14 @@
 {
   "name": "syzer",
-  "version": "1.0.2",
-  "description": "Cli tool to update all npm dependencies at once",
+  "version": "1.2.0",
+  "description": "Updates package.json with latest dependency versions",
   "license": "MIT",
   "bin": {
     "syzer": "lib/cli.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/RocktimSaikia/syzer.git"
+    "url": "git+https://github.com/rocktimsaikia/syzer.git"
   },
   "author": {
     "name": "Rocktim Saikia",
@@ -42,19 +42,20 @@
     "@babel/node": "^7.10.5",
     "cli-table3": "^0.6.0",
     "colors": "^1.4.0",
+    "detect-indent": "6.0.0",
     "fs-extra": "^9.0.1",
     "lodash": "^4.17.19",
     "log-symbols": "^4.0.0",
     "meow": "^7.0.1",
     "ora": "^4.1.0",
-    "pacote": "^11.1.11",
-    "@babel/runtime": "^7.11.2"
+    "pacote": "^11.1.11"
   },
   "devDependencies": {
     "@babel/cli": "^7.10.5",
     "@babel/core": "^7.11.1",
     "@babel/plugin-transform-runtime": "^7.11.0",
     "@babel/preset-env": "^7.11.0",
+    "@babel/runtime": "^7.11.2",
     "@commitlint/cli": "^9.1.1",
     "@commitlint/config-conventional": "^9.1.1",
     "commitizen": "^4.1.2",
