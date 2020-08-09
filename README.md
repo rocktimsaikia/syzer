@@ -14,6 +14,7 @@
 - checks and outputs the current and latest versions of dependencies
 - updates(`-u`) `package.json` with latest dependency versions.
 - ignores(`-i`) specific packages that you don't want to update.
+- syzer does not change the initial indentation style of the package.json([#1](https://github.com/RocktimSaikia/syzer/issues/1)).
 
 ## :cloud: Installation
 
