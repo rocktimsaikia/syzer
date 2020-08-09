@@ -28,9 +28,9 @@ const syzer = async () => {
 
 		const spinner = ora("Reading package.json...").start();
 
-		const { dependencies, devDependencies } = await readJsonFile(
-			"package.json"
-		);
+		let { jsonContents } = await readJsonFile("package.json");
+		let { dependencies, devDependencies } = jsonContents;
+
 		if (typeof dependencies !== "undefined") {
 			//local dependencies
 			const dependency_names = Object.keys(dependencies);

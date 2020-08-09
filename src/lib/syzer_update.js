@@ -24,7 +24,7 @@ const syzer_update = async (args = [0]) => {
 		//loading spinner start!
 		const spinner = ora("Reading package.json").start();
 
-		let jsonContents = await readJsonFile("package.json");
+		let { jsonContents, indent } = await readJsonFile("package.json");
 		let { dependencies, devDependencies } = jsonContents;
 
 		if (typeof dependencies !== "undefined") {
@@ -75,7 +75,10 @@ const syzer_update = async (args = [0]) => {
 
 			jsonContents["devDependencies"] = exlcudedPackages;
 		}
-		await asyncWriteFile("package.json", JSON.stringify(jsonContents, null, 4));
+		await asyncWriteFile(
+			"package.json",
+			JSON.stringify(jsonContents, null, indent)
+		);
 
 		//loading spinner stop!
 		spinner.stop();
