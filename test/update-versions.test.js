@@ -1,4 +1,4 @@
-const { updateVersions } = require("../src/util");
+import { updateVersions } from "../src/util";
 
 describe("upates the outdated versios to latest versions", () => {
 	const arr = [

@@ -1,6 +1,6 @@
-import versionCompare from "./version-compare";
 import colors from "colors";
 import logSymbols from "log-symbols";
+import versionCompare from "./versionCompare";
 
 /**
  * Colorize the package versions that needs to be updated
@@ -11,21 +11,21 @@ const colorizeVersions = (versions) => {
 	let outDatedExists = false;
 
 	for (let i = 0; i < versions.length; i++) {
-		let pkg_name = versions[i][0];
-		let current_v = versions[i][1];
-		let latest_v = versions[i][2];
+		let pkgName = versions[i][0];
+		let currentV = versions[i][1];
+		let latestV = versions[i][2];
 
-		const v_Diff = versionCompare(current_v, latest_v);
+		const vDiff = versionCompare(currentV, latestV);
 
-		if (v_Diff === -1) {
-			pkg_name = `${pkg_name} ${logSymbols.warning}`;
-			current_v = colors.red(current_v);
-			latest_v = colors.cyan(latest_v);
+		if (vDiff === -1) {
+			pkgName = `${pkgName} ${logSymbols.warning}`;
+			currentV = colors.red(currentV);
+			latestV = colors.cyan(latestV);
 			outDatedExists = true;
 		} else {
-			current_v = colors.green(current_v);
+			currentV = colors.green(currentV);
 		}
-		arr[i] = [pkg_name, current_v, latest_v];
+		arr[i] = [pkgName, currentV, latestV];
 	}
 
 	return {

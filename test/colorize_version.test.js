@@ -1,11 +1,11 @@
-const { colorizeVersions } = require("../src/util");
-const colors = require("colors");
-const logSymbols = require("log-symbols");
+import colors from "colors";
+import logSymbols from "log-symbols";
+import { colorizeVersions } from "../src/util";
 
 describe("colorizes the outdated versions.", () => {
 	const Expectedversions = [
-		["chalk " + logSymbols.warning, colors.red("4.1.0"), colors.cyan("4.2.0")],
-		["colors " + logSymbols.warning, colors.red("1.1.0"), colors.cyan("1.1.2")],
+		[`chalk ${logSymbols.warning}`, colors.red("4.1.0"), colors.cyan("4.2.0")],
+		[`colors ${logSymbols.warning}`, colors.red("1.1.0"), colors.cyan("1.1.2")],
 	];
 
 	it("outputs outdated versions with warnings", () => {

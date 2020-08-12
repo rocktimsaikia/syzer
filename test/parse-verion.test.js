@@ -1,4 +1,4 @@
-const { parseVersion } = require("../src/util");
+import { parseVersion } from "../src/util";
 
 describe("parses the version string", () => {
 	const expected = ["4.0.0", "2.0.0", "1.0.0"];

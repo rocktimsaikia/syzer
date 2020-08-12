@@ -18,10 +18,10 @@
  */
 
 const versionCompare = (v1, v2, options) => {
-	var lexicographical = (options && options.lexicographical) || false,
-		zeroExtend = (options && options.zeroExtend) || true,
-		v1parts = (v1 || "0").split("."),
-		v2parts = (v2 || "0").split(".");
+	const lexicographical = (options && options.lexicographical) || false;
+	const zeroExtend = (options && options.zeroExtend) || true;
+	let v1parts = (v1 || "0").split(".");
+	let v2parts = (v2 || "0").split(".");
 
 	const isValidPart = (x) => {
 		return (lexicographical ? /^\d+[A-Za-zαß]*$/ : /^\d+[A-Za-zαß]?$/).test(x);
@@ -38,25 +38,25 @@ const versionCompare = (v1, v2, options) => {
 
 	if (!lexicographical) {
 		v1parts = v1parts.map(function (x) {
-			var match = /[A-Za-zαß]/.exec(x);
+			const match = /[A-Za-zαß]/.exec(x);
 			return Number(
-				match ? x.replace(match[0], "." + x.charCodeAt(match.index)) : x
+				match ? x.replace(match[0], `.${x.charCodeAt(match.index)}`) : x
 			);
 		});
 		v2parts = v2parts.map(function (x) {
-			var match = /[A-Za-zαß]/.exec(x);
+			const match = /[A-Za-zαß]/.exec(x);
 			return Number(
-				match ? x.replace(match[0], "." + x.charCodeAt(match.index)) : x
+				match ? x.replace(match[0], `.${x.charCodeAt(match.index)}`) : x
 			);
 		});
 	}
 
-	for (var i = 0; i < v1parts.length; ++i) {
-		if (v2parts.length == i) {
+	for (let i = 0; i < v1parts.length; ++i) {
+		if (v2parts.length === i) {
 			return 1;
 		}
 
-		if (v1parts[i] == v2parts[i]) {
+		if (v1parts[i] === v2parts[i]) {
 			continue;
 		} else if (v1parts[i] > v2parts[i]) {
 			return 1;
@@ -65,7 +65,7 @@ const versionCompare = (v1, v2, options) => {
 		}
 	}
 
-	if (v1parts.length != v2parts.length) {
+	if (v1parts.length !== v2parts.length) {
 		return -1;
 	}
 

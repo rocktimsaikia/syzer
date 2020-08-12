@@ -8,7 +8,7 @@
  */
 const formatTable = (packages, packageVersions, latestPkgVersions) => {
 	const table = [];
-	packages.map((pkg, i) => {
+	packages.forEach((pkg, i) => {
 		const format = [pkg, packageVersions[i], latestPkgVersions[i]];
 		table.push(format);
 	});

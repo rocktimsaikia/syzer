@@ -1,11 +1,11 @@
-import parseVersion from "./parse-version";
-import colorizeVersions from "./colorize-versions";
-import readJsonFile from "./read-json-file";
-import updateVersions from "./update-versions";
-import formatTable from "./format-table";
-import metaDataFetcher from "./meta-data-fetch";
-import versionCompare from "./version-compare";
-import excludeDependencies from "./exclude-packages";
+import parseVersion from "./parseVersion";
+import colorizeVersions from "./colorizeVersions";
+import readJsonFile from "./readJson";
+import updateVersions from "./updateVersions";
+import formatTable from "./formatTable";
+import metaDataFetcher from "./metaDataFetch";
+import versionCompare from "./versionCompare";
+import excludeDependencies from "./excludePackages";
 
 export {
 	parseVersion,

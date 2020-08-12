@@ -3,7 +3,7 @@ import Table from "cli-table3";
 import colors from "colors";
 import ora from "ora";
 
-/**lib and util imports*/
+/** lib and util imports */
 import {
 	parseVersion,
 	readJsonFile,
@@ -17,7 +17,7 @@ import {
  */
 const syzer = async () => {
 	try {
-		//table structure instantiate
+		// table structure instantiate
 		const table = new Table({
 			style: { head: ["green"] },
 			head: ["Packages", "Current", "Latest"],
@@ -28,21 +28,21 @@ const syzer = async () => {
 
 		const spinner = ora("Reading package.json...").start();
 
-		let { jsonContents } = await readJsonFile("package.json");
-		let { dependencies, devDependencies } = jsonContents;
+		const { jsonContents } = await readJsonFile("package.json");
+		const { dependencies, devDependencies } = jsonContents;
 
 		if (typeof dependencies !== "undefined") {
-			//local dependencies
-			const dependency_names = Object.keys(dependencies);
-			const dependency_versions = parseVersion(Object.values(dependencies));
+			// local dependencies
+			const dependencyNames = Object.keys(dependencies);
+			const dependencyVersions = parseVersion(Object.values(dependencies));
 
 			spinner.color = "yellow";
 			spinner.text = "Loading Dependencies..";
-			//latest dependency versions
-			const latestDependencyVersions = await metaDataFetcher(dependency_names);
+			// latest dependency versions
+			const latestDependencyVersions = await metaDataFetcher(dependencyNames);
 			const dependencyVersionTable = formatTable(
-				dependency_names,
-				dependency_versions,
+				dependencyNames,
+				dependencyVersions,
 				latestDependencyVersions
 			);
 			const { arr: filteredTable, outDatedExists } = colorizeVersions(
@@ -53,17 +53,17 @@ const syzer = async () => {
 		}
 
 		if (typeof devDependencies !== "undefined") {
-			//local dependencies
-			const dependency_names = Object.keys(devDependencies);
-			const dependency_versions = parseVersion(Object.values(devDependencies));
+			// local dependencies
+			const dependencyNames = Object.keys(devDependencies);
+			const dependencyVersions = parseVersion(Object.values(devDependencies));
 
 			spinner.color = "yellow";
 			spinner.text = "Loading DevDependecies..";
-			//latest dependency versions
-			const latestDependencyVersions = await metaDataFetcher(dependency_names);
+			// latest dependency versions
+			const latestDependencyVersions = await metaDataFetcher(dependencyNames);
 			const dependencyVersionTable = formatTable(
-				dependency_names,
-				dependency_versions,
+				dependencyNames,
+				dependencyVersions,
 				latestDependencyVersions
 			);
 			const { arr: filteredTable, outDatedExists } = colorizeVersions(
@@ -82,9 +82,8 @@ const syzer = async () => {
 					"Run `syzer --update` to update your package.json with the latest versions.\n"
 				)
 			);
-		} else {
-			logger.info(colors.green("All the dependencies are up-to-date."));
 		}
+		return logger.info(colors.green("All the dependencies are up-to-date."));
 	} catch (err) {
 		return logger.error(err);
 	}
