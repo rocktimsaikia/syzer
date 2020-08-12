@@ -3,10 +3,8 @@ import util from "util";
 import { info as logger } from "console";
 import colors from "colors";
 import ora from "ora";
-import _ from "lodash";
-const asyncWriteFile = util.promisify(fs.writeFile);
 
-//utils imports
+// utils imports
 import {
 	readJsonFile,
 	parseVersion,
@@ -16,22 +14,24 @@ import {
 	excludeDependencies,
 } from "../util";
 
+const asyncWriteFile = util.promisify(fs.writeFile);
+
 /**
  * @param {Array} args | Updates the package.json with latest versions.
  */
-const syzer_update = async (args = [0]) => {
+const syzerUpdate = async (args = [0]) => {
 	try {
-		//loading spinner start!
+		// loading spinner start!
 		const spinner = ora("Reading package.json").start();
 
-		let { jsonContents, indent } = await readJsonFile("package.json");
-		let { dependencies, devDependencies } = jsonContents;
+		const { jsonContents, indent } = await readJsonFile("package.json");
+		const { dependencies, devDependencies } = jsonContents;
 
 		if (typeof dependencies !== "undefined") {
 			const packageNames = Object.keys(dependencies);
 			const currentVersions = parseVersion(Object.values(dependencies));
 
-			//loading spinner color/text changes!
+			// loading spinner color/text changes!
 			spinner.color = "cyan";
 			spinner.text = "Fetching latest dependencies...";
 
@@ -42,20 +42,20 @@ const syzer_update = async (args = [0]) => {
 				currentVersions,
 				latestVersions
 			);
-			let updatedPackages = updateVersions(allVersions);
-			let exlcudedPackages = excludeDependencies(
+			const updatedPackages = updateVersions(allVersions);
+			const exlcudedPackages = excludeDependencies(
 				dependencies,
 				updatedPackages,
 				args
 			);
-			jsonContents["dependencies"] = exlcudedPackages;
+			jsonContents.dependencies = exlcudedPackages;
 		}
 
 		if (typeof devDependencies !== "undefined") {
 			const packageNames = Object.keys(devDependencies);
 			const currentVersions = parseVersion(Object.values(devDependencies));
 
-			//loading spinner color/text changes!
+			// loading spinner color/text changes!
 			spinner.color = "yellow";
 			spinner.text = "Updating package.json...";
 
@@ -67,20 +67,20 @@ const syzer_update = async (args = [0]) => {
 				latestVersions
 			);
 			const updatedPackages = updateVersions(allVersions);
-			let exlcudedPackages = excludeDependencies(
+			const exlcudedPackages = excludeDependencies(
 				devDependencies,
 				updatedPackages,
 				args
 			);
 
-			jsonContents["devDependencies"] = exlcudedPackages;
+			jsonContents.devDependencies = exlcudedPackages;
 		}
 		await asyncWriteFile(
 			"package.json",
 			JSON.stringify(jsonContents, null, indent)
 		);
 
-		//loading spinner stop!
+		// loading spinner stop!
 		spinner.stop();
 
 		return logger(
@@ -93,4 +93,4 @@ const syzer_update = async (args = [0]) => {
 	}
 };
 
-export default syzer_update;
+export default syzerUpdate;

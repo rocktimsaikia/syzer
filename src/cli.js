@@ -3,7 +3,7 @@
 import meow from "meow";
 import colors from "colors";
 import syzer from "./lib/syzer";
-import syzer_update from "./lib/syzer_update";
+import syzerUpdate from "./lib/syzerUpdate";
 
 const guide = colors.yellow(`
 Usage:
@@ -50,10 +50,10 @@ const cli = meow(guide, {
 	}
 
 	if (cli.flags.update && cli.flags.ignore === undefined) {
-		await syzer_update();
+		await syzerUpdate();
 	}
 
 	if (cli.flags.update && cli.flags.ignore !== undefined) {
-		await syzer_update(cli.flags.ignore);
+		await syzerUpdate(cli.flags.ignore);
 	}
 })();

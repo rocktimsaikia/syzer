@@ -7,28 +7,30 @@ import * as _ from "lodash";
  * @param {Array} args | List of arguments(packages) to exlcude from updating
  */
 const excludeDependencies = (original, pkgs, args) => {
-	//picking the packages from original dependencies that needs to be ignored.
-	//and formatting them from an object to an array ex:[["nodemon","2.3.1"],[...]]
+	// picking the packages from original dependencies that needs to be ignored.
+	// and formatting them from an object to an array ex:[["nodemon","2.3.1"],[...]]
 	const arr = [];
+	const packages = pkgs;
 	const excludedPkgs = _.pick(original, args);
 	const keys = Object.keys(excludedPkgs);
 	const values = Object.values(excludedPkgs);
-	keys.map((key, i) => {
+	keys.forEach((key, i) => {
 		arr[i] = [keys[i], values[i]];
 	});
 
-	//if the already updated dependencies includes any ignored dependencies then
-	//replacing the their versions with the current versions.
+	// if the already updated dependencies includes any ignored dependencies then
+	// replacing the their versions with the current versions.
 	for (let i = 0; i < arr.length; i++) {
-		if (pkgs.hasOwnProperty(arr[i][0])) {
-			pkgs[arr[i][0]] = arr[i][1];
+		const [pkgName, pkgVersion] = arr[i];
+		if (Object.prototype.hasOwnProperty.call(packages, pkgName)) {
+			packages[pkgName] = pkgVersion;
 		}
 	}
-	for (const key in pkgs) {
-		let value = pkgs[key].replace("^", "");
-		pkgs[key] = `^${value}`;
-	}
-	return pkgs;
+	Object.keys(packages).forEach((key) => {
+		const value = packages[key].replace("^", "");
+		packages[key] = `^${value}`;
+	});
+	return packages;
 };
 
 export default excludeDependencies;

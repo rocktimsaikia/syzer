@@ -35,11 +35,12 @@
     "clean": "rimraf lib",
     "build": "babel src -d lib",
     "test": "jest --verbose",
-    "lint": "prettier --check src/**/*.js",
+    "lint": "eslint **/*.js",
+    "lint:fix": "eslint --fix **/*.js",
     "prepublishOnly": "yarn run lint && yarn run test && yarn run clean && yarn run build"
   },
   "dependencies": {
-    "@babel/node": "7.10.5",
+    "@babel/runtime": "7.11.2",
     "cli-table3": "0.6.0",
     "colors": "1.4.0",
     "detect-indent": "6.0.0",
@@ -48,19 +49,25 @@
     "log-symbols": "4.0.0",
     "meow": "7.0.1",
     "ora": "4.1.0",
-    "pacote": "11.1.11",
-    "@babel/runtime": "7.11.2"
+    "pacote": "11.1.11"
   },
   "devDependencies": {
     "@babel/cli": "7.10.5",
     "@babel/core": "7.11.1",
+    "@babel/node": "7.10.5",
     "@babel/plugin-transform-runtime": "7.11.0",
     "@babel/preset-env": "7.11.0",
     "@commitlint/cli": "9.1.1",
     "@commitlint/config-conventional": "9.1.1",
     "commitizen": "4.1.2",
+    "eslint": "7.6.0",
+    "eslint-config-airbnb-base": "14.2.0",
+    "eslint-config-prettier": "6.11.0",
+    "eslint-plugin-import": "2.22.0",
+    "eslint-plugin-jest": "23.20.0",
+    "eslint-plugin-prettier": "3.1.4",
     "husky": "4.2.5",
-    "jest": "26.2.2",
+    "jest": "26.3.0",
     "prettier": "2.0.5",
     "rimraf": "3.0.2"
   }

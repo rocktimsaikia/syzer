@@ -1,6 +1,7 @@
 import fs from "fs-extra";
 import util from "util";
 import detectIndent from "detect-indent";
+
 const asyncReadFile = util.promisify(fs.readFile);
 
 /**

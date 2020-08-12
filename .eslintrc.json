@@ -1,0 +1,21 @@
+{
+  "env": {
+    "node": true,
+    "es2020": true,
+    "jest": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 11,
+    "sourceType": "module"
+  },
+  "extends": [
+    "airbnb-base",
+    "prettier",
+    "plugin:jest/recommended",
+    "plugin:jest/style"
+  ],
+  "plugins": ["prettier", "jest"],
+  "rules": {
+    "no-plusplus": 0
+  }
+}
