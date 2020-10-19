@@ -1,0 +1,9 @@
+{
+	"name": "test-package",
+	"version": "0.0.0",
+	"description": "test-package",
+	"dependencies": {
+		"is-even": "0.1.2",
+		"is-odd": "3.0.0"
+	}
+}
