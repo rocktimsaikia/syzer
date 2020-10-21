@@ -1,12 +1,11 @@
+#!/usr/bin/env node
 'use strcit';
 
 const logSymbols = require('log-symbols');
 const {gray, brightYellow} = require('colors');
 const Table = require('cli-table3');
 const boxen = require('boxen');
-// Const intoStream = require('into-stream');
-// const fs = require('fs');
-// const path = require('path');
+
 const updatePackage = require('../lib/update-package');
 
 const init = outdatedPackages => {
@@ -44,17 +43,14 @@ const init = outdatedPackages => {
 	return table.toString();
 };
 
-const updatePackageJson = async outdatedPackages => {
-	// Const pathToPackageJson = path.resolve(process.cwd(), 'package.json');
-	const {updatedJson, jsonFileIndent} = await updatePackage(outdatedPackages);
+const updatePackageJson = async (outdatedPackages, versionType) => {
+	const {updatedJson, jsonFileIndent} = await updatePackage(outdatedPackages, versionType);
 	const packageJson = JSON.stringify(updatedJson, null, jsonFileIndent);
 
 	return packageJson;
-	// IntoStream(packageJson).pipe(fs.createWriteStream(pathToPackageJson));
 };
 
 module.exports = {
 	init,
 	updatePackageJson
 };
-
