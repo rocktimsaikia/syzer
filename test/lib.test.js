@@ -1,8 +1,8 @@
-import test from 'ava';
-import proxyquire from 'proxyquire';
-import shell from 'shelljs';
-import updatePackages from '../lib/update-package';
-import path from 'path';
+const proxyquire = require('proxyquire');
+const shell = require('shelljs');
+const updatePackages = require('../lib/update-package');
+const path = require('path');
+const {assert} = require('chai');
 
 process.chdir(path.join(__dirname, 'dir_'));
 
@@ -10,14 +10,16 @@ const parsePackages = proxyquire('../lib/parse-package.js', {
 	shelljs: shell
 });
 
-test('parse the outdated packages', t => {
-	t.true(Array.isArray(parsePackages()));
-	t.true(parsePackages().length === 2);
-});
+describe('main --api test', () => {
+	it('parse the outdated packages', () => {
+		assert.isArray(parsePackages());
+		assert.isTrue(parsePackages().length === 2);
+	});
 
-test('update given outdated packages', async t => {
-	const {updatedJson} = await updatePackages(parsePackages(), 'latest');
+	it('update given outdated packages', async () => {
+		const {updatedJson} = await updatePackages(parsePackages(), 'latest');
 
-	t.true(updatedJson.dependencies['is-even'] === '1.0.0');
-	t.true(updatedJson.dependencies['is-odd'] === '3.0.1');
+		assert.isTrue(updatedJson.dependencies['is-even'] === '1.0.0');
+		assert.isTrue(updatedJson.dependencies['is-odd'] === '3.0.1');
+	});
 });

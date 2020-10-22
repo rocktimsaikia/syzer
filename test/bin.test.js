@@ -1,52 +1,36 @@
-import fs from 'fs';
-import test from 'ava';
-import del from 'del';
-import shell from 'shelljs';
+const fs = require('fs');
+const path = require('path');
+const shell = require('shelljs');
+const {assert} = require('chai');
+const {after} = require('mocha');
 
 // Change working dir to the test folder
-process.chdir(__dirname);
+process.chdir(path.join(__dirname, 'dir_'));
 
-const asyncExec = async cmd => {
-	return shell.exec(cmd, {silent: true});
-};
+describe('main --bin execution test', () => {
+	after(() => {
+		const jsonData = fs.readFileSync('package-mock.json', 'utf8');
+		fs.writeFileSync('package.json', jsonData);
+	});
 
-const delJsonFile = async () => {
-	if (fs.existsSync('./package.json')) {
-		await del('./package.json');
-	}
-};
+	it('--outdated, option to check for the outdated packages', () => {
+		const data = shell.exec('node ../../bin/index.js -o', {silent: true});
+		assert.isTrue(data.code === 0);
+	});
 
-test.beforeEach('create mock `package.json` file', async () => {
-	const jsonData = await fs.promises.readFile('dir_/package.json', {encoding: 'utf8'});
-	await fs.promises.writeFile('package.json', jsonData);
-});
+	it('update, option to update packages to wanted version', () => {
+		const data = shell.exec('node ../../bin/index.js update', {silent: true});
+		assert.isTrue(data.code === 0);
+		const jsonData = JSON.parse(fs.readFileSync('package.json', 'utf8'));
+		assert.equal(jsonData.dependencies['is-even'], '0.1.2');
+		assert.equal(jsonData.dependencies['is-odd'], '3.0.0');
+	});
 
-test.afterEach('delete the `package.json` file', async () => {
-	await delJsonFile();
-});
-
-test('--outdated, option to check for the outdated packages', t => {
-	if (shell.which('node')) {
-		const data = shell.exec('node ../bin/index.js -o', {silent: true});
-		t.true(data.code === 0);
-	}
-});
-
-test('update, option to update packages to wanted version', async t => {
-	if (shell.which('node')) {
-		const data = await asyncExec('node ../bin/index.js update');
-		t.true(data.code === 0);
-		t.is(require('./package.json').dependencies['is-even'], '0.1.2');
-		t.is(require('./package.json').dependencies['is-odd'], '3.0.0');
-	}
-});
-
-test('update --latest, option to update packages to latest version', async t => {
-	if (shell.which('node')) {
-		const data = await asyncExec('node ../bin/index.js update --latest');
-		t.true(data.code === 0);
-		console.log(require('./package.json'));
-		t.is(require('./package.json').dependencies['is-even'], '1.0.0');
-		t.is(require('./package.json').dependencies['is-odd'], '3.0.1');
-	}
+	it('update --latest, option to update packages to latest version', () => {
+		const data = shell.exec('node ../../bin/index.js update --latest', {silent: true});
+		assert.isTrue(data.code === 0);
+		const jsonData = JSON.parse(fs.readFileSync('package.json', 'utf8'));
+		assert.equal(jsonData.dependencies['is-even'], '1.0.0');
+		assert.equal(jsonData.dependencies['is-odd'], '3.0.1');
+	});
 });
