@@ -18,7 +18,7 @@
 		"index.js"
 	],
 	"scripts": {
-		"test": "xo && mocha --verbose --timeout 3500"
+		"test": "xo && mocha --verbose --timeout 4000"
 	},
 	"dependencies": {
 		"boxen": "^4.2.0",
