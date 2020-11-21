@@ -3,14 +3,19 @@ const path = require('path');
 const shell = require('shelljs');
 const {assert} = require('chai');
 const {after} = require('mocha');
+const del = require('del');
 
 // Change working dir to the test folder
 process.chdir(path.join(__dirname, 'dir_'));
 
 describe('main --bin execution test', () => {
-	after(() => {
+	before(() => {
 		const jsonData = fs.readFileSync('package-mock.json', 'utf8');
 		fs.writeFileSync('package.json', jsonData);
+	});
+
+	after(async () => {
+		await del('./package.json');
 	});
 
 	it('--outdated, option to check for the outdated packages', () => {
